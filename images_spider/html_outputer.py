@@ -7,6 +7,7 @@ import urllib
 import requests
 from PIL import Image
 from StringIO import StringIO
+import time
 class HtmlOutputer(object):
     def __init__(self):
         self.images_lists = []    #创建一个list，收集数据
@@ -36,6 +37,15 @@ class HtmlOutputer(object):
         print "\n success crawled"
         fo.close()
 
+    def output_one_jpg(self,image_url):
+        abs_path_images = "W:\\ththt\\iamges5"
+        if not os.path.exists(abs_path_images):
+            os.mkdir(abs_path_images)
+        fo = open("image_urls5.txt",'a+')
+        fo.write(image_url+'\n')
+        image_name = time.strftime('%Y-%m-%d-%H-%M-%S',time.localtime(time.time()))
+        self.get_sources(image_url, abs_path_images + "\\%s.jpg" %image_name )
+        fo.close()
     def get_sources(self,url,filename):
             '''
             下载资源的三种方式：
