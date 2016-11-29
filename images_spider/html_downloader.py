@@ -19,7 +19,7 @@ class HtmlDownloader(object):
         if response.getcode() != 200:      #如果访问的状态不是：200（成功），返回none
             return None
         print "download url:%s is ok" %url
-        content = response..read()
+        content = response.read()
         response.close()
         return content             #访问url后，将html内容下载下来，并返回回去
 
@@ -41,7 +41,6 @@ class HtmlDownloader(object):
         response = urllib2.urlopen(req)
         if response.getcode() != 200:      #如果访问的状态不是：200（成功），返回none
             return None
-        print "download url:%s is ok" %url
         cont = response.read()
         encoding = response.info().get('Content-Encoding')
         if encoding == 'gzip':

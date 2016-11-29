@@ -8,18 +8,23 @@ class UrlManager(object):
     def __init__(self):
         self.new_urls = set()
         self.old_urls = set()
+
     def add_new_url(self,url):     #将新的url添加到new_urls中
         if url is None:
             return
         if url not in self.new_urls and url not in self.old_urls:
             self.new_urls.add(url)
+
     def add_new_urls(self,urls):
         if urls is None or len(urls) == 0:
-            return 
+            return
         for url in urls:
             self.add_new_url(url)
-    def has_new_url(self):              
+        return self.new_urls
+
+    def has_new_url(self):
         return len(self.new_urls) != 0   #如果等于0  就是没有
+
     def get_new_url(self):              #将爬取过的url添加到old_urls中
         for s in self.new_urls:
             if re.search(r"_",s):

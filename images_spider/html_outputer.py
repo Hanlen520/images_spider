@@ -11,6 +11,7 @@ import time
 class HtmlOutputer(object):
     def __init__(self):
         self.images_lists = []    #创建一个list，收集数据
+
     def collect_image_url(self,images_list,num):    #如果发送过来的数据，不为空，就将数据添加到datas中
         if images_list is None:
             print "images_list is None"
@@ -19,6 +20,7 @@ class HtmlOutputer(object):
         self.images_lists.extend(images_list)  #list的拼接
         if len(self.images_lists) >= num:
             return False
+
     def output_jpg(self):
         # abs_path = os.getcwd()
         abs_path_images = "W:\\ththt\\iamges5"
@@ -40,12 +42,14 @@ class HtmlOutputer(object):
     def output_one_jpg(self,image_url):
         abs_path_images = "W:\\ththt\\iamges5"
         if not os.path.exists(abs_path_images):
-            os.mkdir(abs_path_images)
+            os.makedirs(abs_path_images)
         fo = open("image_urls5.txt",'a+')
         fo.write(image_url+'\n')
         image_name = time.strftime('%Y-%m-%d-%H-%M-%S',time.localtime(time.time()))
         self.get_sources(image_url, abs_path_images + "\\%s.jpg" %image_name )
         fo.close()
+        return True
+
     def get_sources(self,url,filename):
             '''
             下载资源的三种方式：
