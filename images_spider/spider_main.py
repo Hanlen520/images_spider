@@ -28,7 +28,7 @@ class SpiderMain(object):
         self.outputer.output_jpg()
 
 if __name__ == "__main__":
-    root_url = "http://www.1fl.xyz/forum-2-1.html"  #入口url:决定是否深度或广度
+    root_url = ""  #入口url:决定是否深度或广度
     obj_spider = SpiderMain()
     obj_spider.craw(root_url)
 

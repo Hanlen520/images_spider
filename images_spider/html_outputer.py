@@ -6,8 +6,9 @@ import os
 import urllib
 import requests
 from PIL import Image
-from StringIO import StringIO
+from cStringIO import StringIO
 import time
+
 class HtmlOutputer(object):
     def __init__(self):
         self.images_lists = []    #创建一个list，收集数据
@@ -16,7 +17,6 @@ class HtmlOutputer(object):
         if images_list is None:
             print "images_list is None"
             return
-        #print "collect_image_url were :: %d" %(len(self.images_lists))
         self.images_lists.extend(images_list)  #list的拼接
         if len(self.images_lists) >= num:
             return False
@@ -31,7 +31,6 @@ class HtmlOutputer(object):
         print "\n total image urls is %d \n" %(len(self.images_lists))
         if self.images_lists:
             for image_url in self.images_lists:
-                #print "image_url is :: %s" %image_url
                 fo.write(image_url+'\n')
                 self.get_sources(image_url, abs_path_images + "\\%s.jpg" %images_num )
                 print " ... crawled %s pictures ..." %images_num
@@ -58,10 +57,17 @@ class HtmlOutputer(object):
             3.request.open() --> with open(,"wb") as f : f.write(r.read())
                              --> PIL.Image.open(StringIO(r.read())).save("path.jpg")
             '''
-            cont = requests.get(url)  #bytes
-            if cont.status_code != 200:
-                print "download error at get_sources func"
-                return None
-            image_content = Image.open(StringIO(cont.content))
-            image_content.save(filename)
-            image_content.close()
+            try:
+                cont = requests.get(url)  #bytes
+                if cont.status_code != 200:
+                    print "download error at get_sources func"
+                    return None
+                image_content = Image.open(StringIO(cont.content))
+                image_content.seek(0)
+                image_content.verify()
+                image_content = Image.open(StringIO(cont.content))
+                image_content.save(filename)
+            except IOError,e:
+                print "happend IOError"
+            finally:
+                image_content.close()

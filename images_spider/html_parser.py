@@ -30,7 +30,6 @@ class HtmlParser(object):
         return new_page_urls
 
     def _get_new_image_urls(self, html, soup):    #构造函数：在网页中获取新的数据
-        #<img id="aimg_683" aid="683" src="data/attachment/forum/201601/26/124630djpnnkwkpfvjgnyc.jpg" zoomfile="data/attachment/forum/201601/26/124630djpnnkwkpfvjgnyc.jpg" file="data/attachment/forum/201601/26/124630djpnnkwkpfvjgnyc.jpg" class="zoom" onclick="zoom(this, this.src, 0, 0, 0)" width="850" inpost="1" onmouseover="showMenu({'ctrlid':this.id,'pos':'12'})" data-bd-imgshare-binded="1" initialized="true">
         new_image_urls = []
         image_urls = soup.find_all('img',file=re.compile(r'^data\/attachment\/forum\/\d+?\/.*?\.jpg'))
         for link in image_urls:
