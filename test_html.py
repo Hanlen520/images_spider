@@ -11,7 +11,6 @@ import random
 import time
 import Queue
 
-MAX_SIZE = 5
 #模拟共享队列
 URL_PRODUCER = set()
 URL_CONSUMER = set()
@@ -80,7 +79,7 @@ class SpiderMain(object):
 
 
 if __name__ == "__main__":
-    root_url = "http://www.1fl.xyz/forum-2-1.html"  #入口url:决定是否深度或广度
+    root_url = ""  #入口url:决定是否深度或广度
     obj_spider = SpiderMain()
     obj_spider.urls.add_new_url(root_url)
 

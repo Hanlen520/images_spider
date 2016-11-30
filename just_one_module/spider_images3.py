@@ -6,7 +6,7 @@ import os
 
 #目的网址url
 
-url = "http://www.mm131.com/xinggan/"
+url = ""
 thame = []
 images_num = 1
 #获取目的网页的html源码
@@ -43,18 +43,18 @@ def get_image(url,abs_path_images):
             urllib.urlretrieve(key, abs_path_images + "\\%s.jpg" %images_num )
             print "      crawled %s pictures      " %images_num
             images_num+=1
-                
-   
+
+
 #循环获每一页的主题
 for i in range(2,63):
     if(i>2):
-        url_add = "http://www.mm131.com/xinggan/list_6_%s.html" %i
+        url_add = "/xinggan/list_6_%s.html" %i
         get_pages(url_add)
     else:
         get_pages(url)
 thame_num = 1
 abs_path = os.getcwd()
-abs_path_images = abs_path+"\\iamges3" 
+abs_path_images = abs_path+"\\iamges3"
 if not os.path.exists(abs_path_images):
     os.mkdir(abs_path_images)
 fo = open("image_url2.txt",'a+')
@@ -75,4 +75,4 @@ for thame_url in thame:
         print "    ========================================================"
         break
 fo.close()
-    
+
