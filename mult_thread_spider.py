@@ -46,7 +46,6 @@ class SpiderMain(object):
                 for m in new_image_urls:
                     URL_PRODUCER.add(m)
                 print "P >>>" +str(len(URL_PRODUCER))
-
             CONDITION.notify()
             CONDITION.release()
             time.sleep(random.random())
@@ -64,7 +63,6 @@ class SpiderMain(object):
                     print "wait product"
                 else:
                     break
-
             if len(URL_PRODUCER)>=1:
                 print len(URL_PRODUCER)
                 product = URL_PRODUCER.pop()
@@ -72,17 +70,15 @@ class SpiderMain(object):
                     b = self.outputer.output_one_jpg(product)
                     if b:
                         URL_CONSUMER.add(product)
-
             CONDITION.notify()
             CONDITION.release()
             time.sleep(random.random())
 
 
 if __name__ == "__main__":
-    root_url = ""  #入口url:决定是否深度或广度
+    root_url = "****"  #入口url:决定是否深度或广度
     obj_spider = SpiderMain()
     obj_spider.urls.add_new_url(root_url)
-
     threads = []
     # 创建新线程
     get_thread = threading.Thread(target=obj_spider.craw_page_urls, name='craw_page_urls')
@@ -93,26 +89,21 @@ if __name__ == "__main__":
     work_thread5 = threading.Thread(target=obj_spider.do_craw_work, name='do_craw_work5')
     # 开启新线程
     get_thread.start()
-
     work_thread1.start()
     work_thread2.start()
     work_thread3.start()
     work_thread4.start()
     work_thread5.start()
-
     # 添加线程到线程列表
     threads.append(get_thread)
-
     threads.append(work_thread1)
     threads.append(work_thread2)
     threads.append(work_thread3)
     threads.append(work_thread4)
     threads.append(work_thread5)
-
     # 等待所有线程完成
     for t in threads:
         t.join()
-
     print "Exiting Main Thread"
 
 

@@ -24,7 +24,7 @@ class HtmlDownloader(object):
         return content             #访问url后，将html内容下载下来，并返回回去
 
     def get_page(self,url):
-        headers = {'Host': 'www.1fl.xyz',
+        headers = {'Host': '****',
         'Connection': 'keep-alive',
         'Cache-Control': 'max-age=0',
         'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',

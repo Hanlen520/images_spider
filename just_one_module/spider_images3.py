@@ -67,7 +67,7 @@ for thame_url in thame:
         thame_image_urls_num = len(iamge_list)
         print "====== this topic has %s pictures ======" %thame_image_urls_num
         for l in iamge_list:
-            wait_image_url = "http://www.mm131.com/xinggan/%s" %l
+            wait_image_url = "%s" %l
             fo.write(wait_image_url+'\n')
             get_image(wait_image_url,abs_path_images)
     else:
